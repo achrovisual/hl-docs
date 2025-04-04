@@ -14,13 +14,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Set environment variables
-        run: |
-          AUTHOR_DETAILS="$GITHUB_ACTOR <$GITHUB_ACTOR@users.noreply.github.com>"
-          echo "AUTHOR_DETAILS=$AUTHOR_DETAILS" >> $GITHUB_ENV
-          echo "Git author details: $AUTHOR_DETAILS"
-          
+    steps:          
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -52,8 +46,8 @@ jobs:
           # deploy the default output dir of VuePress
           build_dir: docs/.vuepress/dist
           # Configure Git details
-          author: $AUTHOR_DETAILS
-          committer: $AUTHOR_DETAILS
+          author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
+          committer: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
         env:
           # @see https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
